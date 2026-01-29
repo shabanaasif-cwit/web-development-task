@@ -1,25 +1,23 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from 'react';
+import './App.css';
+import Header from './components/layout/header.jsx';
+import PostPage from "./pages/postPage";
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  // This is the "brain" shared by both components
+  const [searchQuery, setSearchQuery] = useState("");
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
+   <>
+      {/* Pass the state to Header so it can update it */}
+      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
-    </>
-  )
+      <main>
+        {/* Pass the state to PostPage so it can filter the posts */}
+        <PostPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> 
+      </main>
+   </>
+  );
 }
 
-export default App
+export default App;

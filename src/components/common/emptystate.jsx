@@ -2,11 +2,14 @@ import React from 'react';
 
 const EmptyState = ({ title, message, onAction, actionLabel }) => {
   return (
-    <div className="flex flex-col items-center justify-center p-12 text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
-      {/* Simple Icon using SVG */}
+    /* MODIFICATION: Added max-width and mx-auto to keep the box centered and small */
+    <div className="w-full max-w-md mx-auto flex flex-col items-center justify-center p-12 text-center bg-gray-50 rounded-xl border-2 border-dashed border-gray-200">
+      
       <div className="bg-gray-100 p-4 rounded-full mb-4">
         <svg 
+          /* MODIFICATION: Forced dimensions to prevent the 'giant' scaling issue */
           className="w-12 h-12 text-gray-400" 
+          style={{ width: '48px', height: '48px' }} 
           fill="none" 
           stroke="currentColor" 
           viewBox="0 0 24 24"
