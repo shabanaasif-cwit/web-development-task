@@ -1,21 +1,23 @@
-import { Routes, Route } from 'react-router-dom';
+import { useState } from 'react';
 import './App.css';
+import Header from './components/layout/header.jsx';
 import PostPage from "./pages/postPage";
-import Cards from './components/common/cards.jsx';
-import { Car } from 'lucide-react';
 
 function App() {
+  // This is the "brain" shared by both components
+  const [searchQuery, setSearchQuery] = useState("");
   
   return (
    <>
-      <PostPage />  
-      <h1 className="text-4xl font-bold text-blue-600">
-        Tailwind is working 🚀
-      </h1>
-      <Cards />
+      {/* Pass the state to Header so it can update it */}
+      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       
+      <main>
+        {/* Pass the state to PostPage so it can filter the posts */}
+        <PostPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> 
+      </main>
    </>
-     );
+  );
 }
 
 export default App;

@@ -4,12 +4,13 @@ export default function Card({
   title = "Breaking News Headline",
   subtitle = "World · Jan 29, 2026",
   image,
-  excerpt = "This is a short summary of the article. It should feel like a newspaper intro — concise, informative, and inviting enough to read more.",
+  excerpt = "Summary missing...",
   author = "Staff Reporter",
+  onAction,
 }) {
   return (
-    <article className="max-w-md bg-white border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300">
-      {/* Image */}
+    /* MODIFICATION: Added max-w-md to stop stretching and flex-col for internal balance */
+    <article className="max-w-md w-full bg-white border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
       {image && (
         <div className="h-48 w-full overflow-hidden">
           <img
@@ -20,8 +21,8 @@ export default function Card({
         </div>
       )}
 
-      {/* Content */}
-      <div className="p-5 space-y-3">
+      {/* MODIFICATION: Added flex-grow to push the footer to the bottom */}
+      <div className="p-5 space-y-3 flex flex-col flex-grow">
         <p className="text-xs uppercase tracking-widest text-gray-500">
           {subtitle}
         </p>
@@ -30,16 +31,20 @@ export default function Card({
           {title}
         </h2>
 
-        <p className="text-sm text-gray-700 leading-relaxed">
+        <p className="text-sm text-gray-700 leading-relaxed text-justify">
           {excerpt}
         </p>
 
-        <div className="pt-3 border-t border-gray-200 flex items-center justify-between">
+        {/* mt-auto pushes this section to the bottom of the card */}
+        <div className="pt-3 mt-auto border-t border-gray-200 flex items-center justify-between">
           <span className="text-xs italic text-gray-600">
             By {author}
           </span>
 
-          <button className="text-xs font-semibold uppercase tracking-wide text-black hover:underline">
+          <button 
+            onClick={onAction}
+            className="text-xs font-semibold uppercase tracking-wide text-black hover:underline"
+          >
             Read more
           </button>
         </div>

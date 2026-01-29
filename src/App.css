@@ -1,8 +1,8 @@
-/*@tailwind base;
-@tailwind components;
-@tailwind utilities;*/
+/* Remove the old styles - they're not needed with Tailwind */
+/* Keep only custom styles that Tailwind doesn't cover */
+@import "tailwindcss";
 
-/* Custom Button Component */
+/* Optional custom button style */
 .btn-primary {
   padding: 0.5rem 1rem;
   background-color: #2563eb;
