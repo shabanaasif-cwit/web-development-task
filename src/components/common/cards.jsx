@@ -3,7 +3,7 @@ import React from "react";
 export default function Card({
   title = "Breaking News Headline",
   subtitle = "World · Jan 29, 2026",
-  image,
+  image = "",
   excerpt = "Summary missing...",
   author = "Staff Reporter",
   onAction,
@@ -27,7 +27,7 @@ export default function Card({
           {subtitle}
         </p>
 
-        <h2 className="text-2xl font-serif font-bold leading-tight text-gray-900">
+        <h2 className="text-xl font-serif font-bold leading-tight text-gray-900">
           {title}
         </h2>
 
