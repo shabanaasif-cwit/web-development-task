@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import PostList from "../components/posts/postList";
 import EmptyState from "../components/common/EmptyState";
 import { fetchPosts } from "../pages/Service/api"; 
@@ -11,6 +11,12 @@ function PostPage({ searchQuery, setSearchQuery }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("newest");
   const postsPerPage = 15; 
+
+  const handleReadMore = useCallback((url) => {
+    if (url) {
+      window.open(url, "_blank");
+    }
+  }, []);
 
   useEffect(() => {
     const getPosts = async () => {
@@ -27,40 +33,33 @@ function PostPage({ searchQuery, setSearchQuery }) {
     getPosts();
   }, []);
 
-  // src/pages/PostPage.jsx
+  const sortedPosts = useMemo(() => {
+    const filtered = posts.filter((post) => {
+      const hasContent = post.excerpt && 
+                         post.excerpt !== "No summary available." && 
+                         post.excerpt.trim() !== "";
+      const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+      return hasContent && matchesSearch;
+    });
 
-// 1. Logic chain: Remove empty content -> Filter by search -> Sort -> Calculate Counts -> Paginate
-const filteredPosts = posts.filter((post) => {
-  // Check if the post has actual content and isn't the fallback string
-  const hasContent = post.excerpt && 
-                     post.excerpt !== "No summary available." && 
-                     post.excerpt.trim() !== "";
-  
-  // Check if it matches the user's search query
-  const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase());
+    return [...filtered].sort((a, b) => {
+      if (sortType === "az") return a.title.localeCompare(b.title);
+      if (sortType === "za") return b.title.localeCompare(a.title);
+      if (sortType === "newest") return new Date(b.publishedAt) - new Date(a.publishedAt);
+      if (sortType === "oldest") return new Date(a.publishedAt) - new Date(b.publishedAt);
+      return 0;
+    });
+  }, [posts, searchQuery, sortType]);
 
-  // Only return posts that pass BOTH checks
-  return hasContent && matchesSearch;
-});
-
-// The sortedPosts logic now only runs on items with valid content
-const sortedPosts = [...filteredPosts].sort((a, b) => {
-  if (sortType === "az") return a.title.localeCompare(b.title);
-  if (sortType === "za") return b.title.localeCompare(a.title);
-  if (sortType === "newest") return new Date(b.publishedAt) - new Date(a.publishedAt);
-  if (sortType === "oldest") return new Date(a.publishedAt) - new Date(b.publishedAt);
-  return 0;
-});
-
-  // 2. MODIFICATION: Item Count Calculations
   const totalResults = sortedPosts.length;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(totalResults / postsPerPage);
 
-  // Calculate the visible range (e.g., 1-15)
+
   const startRange = totalResults === 0 ? 0 : indexOfFirstPost + 1;
+
   const endRange = Math.min(indexOfLastPost, totalResults);
 
   const goToNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -69,15 +68,14 @@ const sortedPosts = [...filteredPosts].sort((a, b) => {
   return (
     <div className="w-full bg-white">
       <main className="max-w-6xl mx-auto px-4 py-10">
-        
+
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-extrabold text-[#121417] flex flex-col">
               Latest Updates
               <span className="h-1 w-24 bg-orange-600 mt-2"></span>
             </h2>
-            
-            {/* 3. MODIFICATION: Display Item Counts */}
+
             {!loading && !error && totalResults > 0 && (
               <p className="text-sm text-gray-500 mt-4 font-medium italic">
                 Showing <span className="text-black font-bold">{startRange}-{endRange}</span> of <span className="text-black font-bold">{totalResults}</span> results
@@ -86,8 +84,18 @@ const sortedPosts = [...filteredPosts].sort((a, b) => {
           </div>
 
           <div className="flex items-center gap-2">
-            <label className="text-sm font-bold text-gray-500 uppercase tracking-tighter">Sort By:</label>
+            {/* FIX 1: Use htmlFor to associate the label with the select id.
+              This solves: "No label associated with a form field" 
+            */}
+            <label 
+              htmlFor="post-sort-select" 
+              className="text-sm font-bold text-gray-500 uppercase tracking-tighter"
+            >
+              Sort By:
+            </label>
             <select 
+              id="post-sort-select" // Matches htmlFor above
+              name="sortType"       // FIX 2: Added name attribute for better form handling
               value={sortType}
               onChange={(e) => {
                 setSortType(e.target.value);
@@ -105,17 +113,15 @@ const sortedPosts = [...filteredPosts].sort((a, b) => {
 
         <section>
           {loading && <div className="text-center py-10">Loading News...</div>}
-
           {error && <div className="text-red-600 text-center py-10">{error}</div>}
 
           {!loading && !error && (
-
             <>
               {totalResults === 0 ? (
                 <EmptyState onAction={() => setSearchQuery("")} />
               ) : (
                 <>
-                  <PostList posts={currentPosts} />
+                  <PostList posts={currentPosts} onReadMore={handleReadMore} />
 
                   <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-100">
                     <button
