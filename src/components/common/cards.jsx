@@ -76,7 +76,7 @@ export default function Card({
   const truncatedExcerpt = excerpt.split(" ").slice(0, 15).join(" ") + (excerpt.split(" ").length > 16 ? "..." : "");
 
   const fallbackImage = "https://images.unsplash.com/photo-1504711434969-e33886168f5c?auto=format&fit=crop&q=80&w=1000";
-
+  
   return (
 
     <article className="max-w-md w-full bg-white border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
