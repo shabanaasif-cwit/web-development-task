@@ -1,22 +1,23 @@
-import { useState } from 'react';
 import './App.css';
+
 import Header from './components/layout/header.jsx';
 import PostPage from "./pages/postPage";
+// MODIFICATION: Imported the NewsProvider to wrap the app
+import { NewsProvider } from "./context/NewsContext"; 
 
 function App() {
-  // This is the "brain" shared by both components
-  const [searchQuery, setSearchQuery] = useState("");
+  // MODIFICATION: Removed 'const [searchQuery, setSearchQuery] = useState("");' 
+  // This state now lives inside NewsContext.jsx
   
   return (
-   <>
-      {/* Pass the state to Header so it can update it */}
-      <Header searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+    <NewsProvider>
+      {/* MODIFICATION: Removed props (searchQuery/setSearchQuery) from Header */}
+      <Header /> 
       
-      <main>
-        {/* Pass the state to PostPage so it can filter the posts */}
-        <PostPage searchQuery={searchQuery} setSearchQuery={setSearchQuery} /> 
-      </main>
-   </>
+      {/* MODIFICATION: Removed <main> wrapper as it exists inside PostPage */}
+      {/* MODIFICATION: Removed props from PostPage */}
+      <PostPage /> 
+    </NewsProvider>
   );
 }
 
