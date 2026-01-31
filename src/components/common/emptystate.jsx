@@ -26,7 +26,7 @@ const EmptyState = ({ title, message, onAction, actionLabel }) => {
       {onAction && (
         <button
           onClick={onAction}
-          className="btn-primary" 
+          className="shrink-0 bg-[#FF6600] text-white px-4 py-2 text-xs font-bold uppercase tracking-wide rounded-sm hover:bg-black transition-colors"
         >
           {actionLabel || "Add New Item"}
         </button>
