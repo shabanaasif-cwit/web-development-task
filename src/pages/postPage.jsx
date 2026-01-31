@@ -1,17 +1,29 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
+// MODIFICATION: Import useParams to listen to the URL category
+import { useParams } from "react-router-dom"; 
 import PostList from "../components/posts/postList";
 import EmptyState from "../components/common/EmptyState";
-// MODIFICATION: Imported useNews from Context instead of the old hooks folder
 import { useNews } from "../context/NewsContext"; 
 
-// MODIFICATION: Removed props { searchQuery, setSearchQuery } from function parameters
 function PostPage() {
-  // MODIFICATION: Consuming global news data and search query from Context
-  const { posts, loading, error, searchQuery, setSearchQuery } = useNews();
+  // MODIFICATION: Grab the dynamic 'category' from the URL path
+  const { category } = useParams(); 
+  const { posts, loading, error, searchQuery, setSearchQuery, setSelectedCategory } = useNews();
   
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("newest");
   const postsPerPage = 15; 
+
+  // MODIFICATION: Sync the Context state with the URL category
+  useEffect(() => {
+    if (category) {
+      // Capitalize for consistent state naming (e.g., 'business' -> 'Business')
+      const formattedCategory = category.charAt(0).toUpperCase() + category.slice(1);
+      setSelectedCategory(formattedCategory);
+      // Reset to first page when category changes
+      setCurrentPage(1); 
+    }
+  }, [category, setSelectedCategory]);
 
   const handleReadMore = useCallback((url) => {
     if (url) {
@@ -19,9 +31,6 @@ function PostPage() {
     }
   }, []);
 
-//remove useEffect because if we use app would fetch the data twice once when the provider mount and second when the page mount
-
-  // MODIFICATION: Filter/Sort logic now references 'posts' and 'searchQuery' from Context
   const sortedPosts = useMemo(() => {
     const filtered = posts.filter((post) => {
       const hasContent = post.excerpt && 
@@ -40,7 +49,6 @@ function PostPage() {
     });
   }, [posts, searchQuery, sortType]);
 
-  // ... Pagination and JSX logic remains exactly as before ...
   const totalResults = sortedPosts.length;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -59,7 +67,8 @@ function PostPage() {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-extrabold text-[#121417] flex flex-col">
-              Latest Updates
+              {/* MODIFICATION: Dynamic Title based on URL category */}
+              {category ? `${category.charAt(0).toUpperCase() + category.slice(1)} Updates` : "Latest Updates"}
               <span className="h-1 w-24 bg-orange-600 mt-2"></span>
             </h2>
 
@@ -93,7 +102,7 @@ function PostPage() {
         </div>
 
         <section>
-          {loading && <div className="text-center py-10">Loading News...</div>}
+          {loading && <div className="text-center py-10">Loading {category} News...</div>}
           {error && <div className="text-red-600 text-center py-10">{error}</div>}
 
           {!loading && !error && (
