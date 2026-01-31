@@ -1,7 +1,13 @@
 import React from "react";  
 import { Search, Moon, ChevronDown } from "lucide-react";
+// MODIFICATION: Import the context hook. Note the "../../" to go up two levels from src/components/layout/
+import { useNews } from "../../context/NewsContext"; 
 
-function Header({ searchQuery, setSearchQuery }) {
+// MODIFICATION: Removed { searchQuery, setSearchQuery } from function parameters (Removing Prop Drilling)
+function Header() {
+  // MODIFICATION: Accessing global state directly from context instead of props
+  const { searchQuery, setSearchQuery } = useNews();
+
   // Navigation categories
   const navItems = [
     "Home", "Post Layouts", "Contact", "Fashion", "Popular", 
@@ -27,8 +33,9 @@ function Header({ searchQuery, setSearchQuery }) {
                 type="text"
                 placeholder="Search anything..."
                 className="bg-transparent border-none outline-none text-gray-300 text-sm py-1 skew-x-12 w-full md:w-64 focus:ring-0"
+                // MODIFICATION: Using state directly from Context
                 value={searchQuery}
-                //callback to update search query in parent component
+                // MODIFICATION: Updating global state directly via Context setter
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
               <button className="text-white hover:text-orange-400 p-1 ml-2 skew-x-12 transition-colors cursor-pointer">
@@ -44,7 +51,6 @@ function Header({ searchQuery, setSearchQuery }) {
 
       {/* BOTTOM SECTION: Navigation Menu */}
       <div className="w-full border-t border-gray-800/50">
-        {/* Added 'scrollbar-hide' logic and ensured overflow is handled cleanly */}
         <nav className="max-w-6xl mx-auto px-4 overflow-x-auto overflow-y-hidden [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           <ul className="flex items-center gap-6 py-3 whitespace-nowrap">
             {navItems.map((item, index) => (

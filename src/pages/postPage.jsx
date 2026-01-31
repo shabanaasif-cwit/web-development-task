@@ -1,12 +1,13 @@
 import React, { useState, useCallback, useMemo } from "react";
 import PostList from "../components/posts/postList";
 import EmptyState from "../components/common/EmptyState";
-import { useNews } from "../hooks/useNews"; // Using the new hook
+// MODIFICATION: Imported useNews from Context instead of the old hooks folder
+import { useNews } from "../context/NewsContext"; 
 
-function PostPage({ searchQuery, setSearchQuery }) {
-  // 1. API Logic is now handled here. 
-  // We removed useEffect, fetchPosts import, and manual loading/error states.
-  const { posts, loading, error } = useNews();
+// MODIFICATION: Removed props { searchQuery, setSearchQuery } from function parameters
+function PostPage() {
+  // MODIFICATION: Consuming global news data and search query from Context
+  const { posts, loading, error, searchQuery, setSearchQuery } = useNews();
   
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("newest");
@@ -18,7 +19,9 @@ function PostPage({ searchQuery, setSearchQuery }) {
     }
   }, []);
 
-  // 2. The sorting and filtering logic remains exactly the same
+//remove useEffect because if we use app would fetch the data twice once when the provider mount and second when the page mount
+
+  // MODIFICATION: Filter/Sort logic now references 'posts' and 'searchQuery' from Context
   const sortedPosts = useMemo(() => {
     const filtered = posts.filter((post) => {
       const hasContent = post.excerpt && 
@@ -37,7 +40,7 @@ function PostPage({ searchQuery, setSearchQuery }) {
     });
   }, [posts, searchQuery, sortType]);
 
-  // 3. Pagination calculations remain untouched
+  // ... Pagination and JSX logic remains exactly as before ...
   const totalResults = sortedPosts.length;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
@@ -100,7 +103,6 @@ function PostPage({ searchQuery, setSearchQuery }) {
               ) : (
                 <>
                   <PostList posts={currentPosts} onReadMore={handleReadMore} />
-                  
                   <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-100">
                     <button
                       onClick={goToPrev}
@@ -111,11 +113,9 @@ function PostPage({ searchQuery, setSearchQuery }) {
                     >
                       ← Prev
                     </button>
-
                     <span className="text-sm font-medium text-gray-500">
                       Page {currentPage} of {totalPages || 1}
                     </span>
-
                     <button
                       onClick={goToNext}
                       disabled={currentPage === totalPages || totalPages === 0}
