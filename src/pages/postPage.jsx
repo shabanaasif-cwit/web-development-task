@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import PostList from "../components/posts/postList";
 import EmptyState from "../components/common/EmptyState";
-import { fetchPosts } from "../pages/Service/api"; 
+import { useNews } from "../hooks/useNews"; // Using the new hook
 
 function PostPage({ searchQuery, setSearchQuery }) {
-  const [posts, setPosts] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  // 1. API Logic is now handled here. 
+  // We removed useEffect, fetchPosts import, and manual loading/error states.
+  const { posts, loading, error } = useNews();
   
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("newest");
@@ -18,21 +18,7 @@ function PostPage({ searchQuery, setSearchQuery }) {
     }
   }, []);
 
-  useEffect(() => {
-    const getPosts = async () => {
-      try {
-        setLoading(true);
-        const data = await fetchPosts();
-        setPosts(data);
-      } catch (err) {
-        setError("Failed to fetch news. Please check your connection.");
-      } finally {
-        setLoading(false);
-      }
-    };
-    getPosts();
-  }, []);
-
+  // 2. The sorting and filtering logic remains exactly the same
   const sortedPosts = useMemo(() => {
     const filtered = posts.filter((post) => {
       const hasContent = post.excerpt && 
@@ -51,15 +37,14 @@ function PostPage({ searchQuery, setSearchQuery }) {
     });
   }, [posts, searchQuery, sortType]);
 
+  // 3. Pagination calculations remain untouched
   const totalResults = sortedPosts.length;
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
   const totalPages = Math.ceil(totalResults / postsPerPage);
 
-
   const startRange = totalResults === 0 ? 0 : indexOfFirstPost + 1;
-
   const endRange = Math.min(indexOfLastPost, totalResults);
 
   const goToNext = () => setCurrentPage((prev) => Math.min(prev + 1, totalPages));
@@ -68,7 +53,6 @@ function PostPage({ searchQuery, setSearchQuery }) {
   return (
     <div className="w-full bg-white">
       <main className="max-w-6xl mx-auto px-4 py-10">
-
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-8 gap-4">
           <div>
             <h2 className="text-3xl font-extrabold text-[#121417] flex flex-col">
@@ -84,18 +68,12 @@ function PostPage({ searchQuery, setSearchQuery }) {
           </div>
 
           <div className="flex items-center gap-2">
-            {/* FIX 1: Use htmlFor to associate the label with the select id.
-              This solves: "No label associated with a form field" 
-            */}
-            <label 
-              htmlFor="post-sort-select" 
-              className="text-sm font-bold text-gray-500 uppercase tracking-tighter"
-            >
+            <label htmlFor="post-sort-select" className="text-sm font-bold text-gray-500 uppercase tracking-tighter">
               Sort By:
             </label>
             <select 
-              id="post-sort-select" // Matches htmlFor above
-              name="sortType"       // FIX 2: Added name attribute for better form handling
+              id="post-sort-select" 
+              name="sortType" 
               value={sortType}
               onChange={(e) => {
                 setSortType(e.target.value);
@@ -122,15 +100,13 @@ function PostPage({ searchQuery, setSearchQuery }) {
               ) : (
                 <>
                   <PostList posts={currentPosts} onReadMore={handleReadMore} />
-
+                  
                   <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-100">
                     <button
                       onClick={goToPrev}
                       disabled={currentPage === 1}
                       className={`px-6 py-2 border rounded-sm font-semibold transition-all ${
-                        currentPage === 1 
-                        ? "text-gray-300 border-gray-100 cursor-not-allowed" 
-                        : "text-black border-black hover:bg-black hover:text-white"
+                        currentPage === 1 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-black hover:text-white"
                       }`}
                     >
                       ← Prev
@@ -144,9 +120,7 @@ function PostPage({ searchQuery, setSearchQuery }) {
                       onClick={goToNext}
                       disabled={currentPage === totalPages || totalPages === 0}
                       className={`px-6 py-2 border rounded-sm font-semibold transition-all ${
-                        currentPage === totalPages || totalPages === 0
-                        ? "text-gray-300 border-gray-100 cursor-not-allowed" 
-                        : "text-black border-black hover:bg-black hover:text-white"
+                        currentPage === totalPages || totalPages === 0 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-black hover:text-white"
                       }`}
                     >
                       Next →

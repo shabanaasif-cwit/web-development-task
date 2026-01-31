@@ -15,7 +15,7 @@ function Header({ searchQuery, setSearchQuery }) {
         
         {/* LOGO */}
         <div className="flex items-center tracking-tighter uppercase shrink-0">
-          <span className="text-orange-600 text-2xl md:text-5xl font-black italic">Daily</span>
+          <span className="text-orange-600 text-2xl md:text-5xl font-black italic cursor-pointer">Daily</span>
           <span className="text-white text-xl md:text-2xl font-bold ml-1">News</span>
         </div>
 

@@ -79,7 +79,7 @@ export default function Card({
   
   return (
 
-    <article className="max-w-md w-full bg-white border border-gray-200 rounded-sm shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
+    <article className="max-w-md w-full bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col h-full">
       {/* Maintenance Issue 4: Traceability
           When a bug occurs in CardHeader, you have to trace the prop back through card
           top PostList and finally to the API call to find the source.
@@ -88,7 +88,7 @@ export default function Card({
       {/* Prop Drilling: Passing data to CardHeader */}
       <CardHeader image={image} title={title} fallbackImage={fallbackImage} />
 
-      <div className="p-5 flex flex-col flex-grow">
+      <div className="p-5 flex flex-col flex-grow rounded-xl">
         {/* Prop Drilling: Passing data to CardContent */}
         <CardContent 
           subtitle={subtitle} 
