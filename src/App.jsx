@@ -1,5 +1,5 @@
 import './App.css';
-
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Header from './components/layout/header.jsx';
 import PostPage from "./pages/postPage";
 // MODIFICATION: Imported the NewsProvider to wrap the app
@@ -10,13 +10,16 @@ function App() {
   // This state now lives inside NewsContext.jsx
   
   return (
-    <NewsProvider>
-      {/* MODIFICATION: Removed props (searchQuery/setSearchQuery) from Header */}
-      <Header /> 
-      
-      {/* MODIFICATION: Removed <main> wrapper as it exists inside PostPage */}
-      {/* MODIFICATION: Removed props from PostPage */}
-      <PostPage /> 
+   <NewsProvider>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          {/* Default path redirects to /home */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          {/* Dynamic route: the ':category' part becomes a variable */}
+          <Route path="/:category" element={<PostPage />} />
+        </Routes>
+      </BrowserRouter>
     </NewsProvider>
   );
 }
