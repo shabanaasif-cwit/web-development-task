@@ -20,17 +20,17 @@ const EmptyState = ({ title, message, onAction, actionLabel }) => {
 
       <h3 className="text-xl font-semibold text-gray-900 mb-2">{title || "No data found"}</h3>
       <p className="text-gray-500 max-w-xs mb-6">
-        {message || "Try adjusting your filters or adding a new item to get started."}
+        {message || ""}
       </p>
 
-      {onAction && (
+      {/*{onAction && (
         <button
           onClick={onAction}
           className="shrink-0 bg-[#FF6600] text-white px-4 py-2 text-xs font-bold uppercase tracking-wide rounded-sm hover:bg-black transition-colors"
         >
           {actionLabel || "Add New Item"}
         </button>
-      )}
+      )}*/}
     </div>
   );
 };

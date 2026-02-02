@@ -12,7 +12,7 @@ function PostPage() {
   
   const [currentPage, setCurrentPage] = useState(1);
   const [sortType, setSortType] = useState("newest");
-  const postsPerPage = 15; 
+  const postsPerPage = 9; 
 
   // MODIFICATION: Sync the Context state with the URL category
   useEffect(() => {

@@ -20,6 +20,7 @@ function Footer() {
               onClick={() => navigate("/home")}
             >
               <span className="text-orange-600 text-3xl font-black italic">Daily</span>
+              {/*marign left ml-1 */}
               <span className="text-white text-xl font-bold ml-1">News</span>
             </div>
             {/*leading-relaxed it sets the line height to 1.625 */}

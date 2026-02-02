@@ -21,6 +21,7 @@ export const useNews = () => {
     }
   };
 
+  //it should render once
   useEffect(() => {
     getPosts();
   }, []);

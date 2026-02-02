@@ -21,7 +21,6 @@ function App() {
         <Routes>
           {/* Default path redirects to /home */}
           <Route path="/" element={<Navigate to="/home" />} />
-
           {/* 2. ADD THIS LINE: Explicit route for contact */}
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/about" element={<AboutPage />} />

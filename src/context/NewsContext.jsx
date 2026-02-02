@@ -13,6 +13,8 @@ export const NewsProvider = ({ children }) => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Home");
 
+
+  //cat stands fpr categories
   const loadData = async (cat) => {
     try {
       setLoading(true);

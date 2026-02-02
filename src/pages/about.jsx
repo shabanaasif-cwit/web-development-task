@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { Users, Globe, Award, ShieldCheck } from "lucide-react";
 
+
+//this function should render once
 function AboutPage() {
   // Ensure the page starts at the top
   useEffect(() => {

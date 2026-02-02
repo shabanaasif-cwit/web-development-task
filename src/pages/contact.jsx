@@ -37,7 +37,7 @@ function ContactPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Contact Information Cards */}
-          <div className="space-y-6">
+          <div className="space-y-6"> 
             <div className="bg-gray-50 p-6 border-l-4 border-orange-600 shadow-sm">
               <div className="flex items-center gap-4 mb-2">
                 <Mail className="text-orange-600" size={24} />
