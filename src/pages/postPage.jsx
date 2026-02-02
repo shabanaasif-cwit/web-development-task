@@ -25,11 +25,7 @@ function PostPage() {
     }
   }, [category, setSelectedCategory]);
 
-  const handleReadMore = useCallback((url) => {
-    if (url) {
-      window.open(url, "_blank");
-    }
-  }, []);
+
 
   const sortedPosts = useMemo(() => {
     const filtered = posts.filter((post) => {
@@ -50,9 +46,13 @@ function PostPage() {
   }, [posts, searchQuery, sortType]);
 
   const totalResults = sortedPosts.length;
+  //2 (currentPage) * 15 (postsPerPage) = 30
   const indexOfLastPost = currentPage * postsPerPage;
+  //30 (LastPost) - 15 (postsPerPage) = 15
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  //ignores posts 0-14 and 31-100. It only gives your PostList the 15 articles meant for Page 2.
   const currentPosts = sortedPosts.slice(indexOfFirstPost, indexOfLastPost);
+  //Rounds up to 7
   const totalPages = Math.ceil(totalResults / postsPerPage);
 
   const startRange = totalResults === 0 ? 0 : indexOfFirstPost + 1;

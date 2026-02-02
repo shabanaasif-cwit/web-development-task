@@ -2,6 +2,7 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import { fetchPosts } from "../Service/api"; // Added capital S
 
+//intialization of Context Object
 const NewsContext = createContext();
 
 export const NewsProvider = ({ children }) => {
@@ -29,12 +30,16 @@ export const NewsProvider = ({ children }) => {
     }
   };
 
-  // Lifecycle: Re-fetch whenever the category changes
-  useEffect(() => {
-    loadData(selectedCategory);
-  }, [selectedCategory]);
+    // Lifecycle: Re-fetch whenever the category changes
+    useEffect(() => {
+      loadData(selectedCategory);
+    }, [selectedCategory]);
 
 
+
+  //This const value object is the "Master Key" to your application's data. Everything you’ve built 
+  // so far—the state, the fetching logic, and the categories—is being bundled together here so it can be shared 
+  // with any component in your project.
   const value = {
     posts,
     loading,

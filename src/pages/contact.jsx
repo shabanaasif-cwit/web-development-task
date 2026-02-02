@@ -68,7 +68,7 @@ function ContactPage() {
 
           {/* Contact Form */}
           <div className="lg:col-span-2">
-            <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-gray-100 p-8 shadow-xl rounded-sm">
+            <form onSubmit={handleSubmit} className="space-y-6 bg-white border border-gray-100 p-8 shadow-sm rounded-sm">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <label className="block text-sm font-bold text-gray-700 uppercase mb-2">Full Name</label>

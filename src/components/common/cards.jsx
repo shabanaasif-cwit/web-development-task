@@ -71,7 +71,7 @@ export default function Card({
               e.stopPropagation(); // Stops the click from triggering the parent article's onClick twice
               onAction();
             }}
-            // 'active:scale-95': Provides a "button press" physical feedback
+            // 'active:scale-95': Provides a "button press" physical feedback px: horizontal & py: vertical
             // 'hover:bg-black': Contrasts against the orange for a premium feel
             className="shrink-0 bg-[#FF6600] text-white px-4 py-2 text-xs font-bold uppercase tracking-wide rounded-sm hover:bg-black transition-all duration-300 transform active:scale-95 shadow-md"
           >

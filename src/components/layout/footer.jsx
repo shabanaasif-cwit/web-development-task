@@ -7,7 +7,8 @@ function Footer() {
   const navigate = useNavigate(); // 2. Initialize the navigation function
 
   return (
-    <footer className="w-full bg-[#121417] text-white border-t border-gray-800 pt-12 pb-6">
+    //#121417 dark-gray
+    <footer className="w-full bg-[#121417] text-white border-t border-gray-800 pt-12 pb-6"> 
       <div className="max-w-6xl mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           
@@ -21,7 +22,7 @@ function Footer() {
               <span className="text-orange-600 text-3xl font-black italic">Daily</span>
               <span className="text-white text-xl font-bold ml-1">News</span>
             </div>
-            
+            {/*leading-relaxed it sets the line height to 1.625 */}
             <p className="text-gray-400 text-sm leading-relaxed">
               Bringing you the most reliable and up-to-date news from around the world. Stay informed, stay ahead.
             </p>

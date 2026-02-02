@@ -6,10 +6,10 @@ export default function Loader() {
       {/* Image placeholder */}
       <div className="h-48 w-full bg-gray-200 mb-5" />
 
-      {/* Subtitle */}
+      {/* Subtitle bg-gray-200 light, neutral gray color.*/}
       <div className="h-3 w-1/3 bg-gray-200 mb-3" />
 
-      {/* Title */}
+      {/* Title bg-gray-300 light-to-medium gray color*/}
       <div className="h-6 w-3/4 bg-gray-300 mb-4" />
       <div className="h-6 w-2/4 bg-gray-300 mb-4" />
 
