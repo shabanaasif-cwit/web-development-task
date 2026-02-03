@@ -18,7 +18,7 @@ const EmptyState = ({ title, message, onAction, actionLabel }) => {
         </svg>
       </div>
 
-      <h3 className="text-xl font-semibold text-gray-900 mb-2">{title || "No data found"}</h3>
+      <h3 className="text-xl font-semibold text-gray-900 mb-2">{title || "No News found"}</h3>
       <p className="text-gray-500 max-w-xs mb-6">
         {message || ""}
       </p>

@@ -1,28 +1,49 @@
 // src/context/NewsContext.jsx
 import React, { createContext, useState, useEffect, useContext } from "react";
-import { fetchPosts } from "../Service/api"; // Added capital S
+import { fetchPosts } from "../Service/api"; 
 
-//intialization of Context Object
+
+
+
+
 const NewsContext = createContext();
 
 export const NewsProvider = ({ children }) => {
-
+  
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("Home");
 
+  // --- NEW: THEME STATE ---
+  // We check localStorage first so the user's preference persists
+  const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  //cat stands fpr categories
+  // --- NEW: THEME EFFECT ---
+  // This physically adds/removes the "dark" class to your HTML tag
+  useEffect(() => {
+    const root = window.document.documentElement;
+    if (theme === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+    // Save preference for next visit
+    localStorage.setItem("theme", theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
+  };
+
   const loadData = async (cat) => {
     try {
       setLoading(true);
       setError(null);
-      
-      // FIX: Map "Home" UI label to "general" API category
+
       const apiCategory = (cat === "Home") ? "general" : cat;
-      
+
       const data = await fetchPosts(apiCategory);
       setPosts(data);
     } catch (err) {
@@ -32,16 +53,12 @@ export const NewsProvider = ({ children }) => {
     }
   };
 
-    // Lifecycle: Re-fetch whenever the category changes
-    useEffect(() => {
-      loadData(selectedCategory);
-    }, [selectedCategory]);
+  useEffect(() => {
+    loadData(selectedCategory);
+  }, [selectedCategory]);
 
 
-
-  //This const value object is the "Master Key" to your application's data. Everything you’ve built 
-  // so far—the state, the fetching logic, and the categories—is being bundled together here so it can be shared 
-  // with any component in your project.
+  
   const value = {
     posts,
     loading,
@@ -50,6 +67,9 @@ export const NewsProvider = ({ children }) => {
     setSearchQuery,
     selectedCategory,
     setSelectedCategory,
+    // --- ADDED TO MASTER KEY ---
+    theme,
+    toggleTheme,
     refresh: () => loadData(selectedCategory)
   };
 
@@ -66,3 +86,4 @@ export const useNews = () => {
   if (!context) throw new Error("useNews must be used within a NewsProvider");
   return context;
 };
+

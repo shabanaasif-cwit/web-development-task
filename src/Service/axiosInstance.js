@@ -14,11 +14,11 @@ const newsInstance = axios.create({
 });
 // Response Interceptor: The "Safety Net"
 newsInstance.interceptors.response.use(
-  (response) => response, // Pass successful responses through
+  (response) => response, // Pass successful responses through path
   (error) => {
     let customError = {
       message: "An unexpected error occurred.",
-      status: error.response?.status,
+      status: error.response?.status, //revents app form crashing cannot read the property 'status' of undefined
       type: "Unknown"
     };
 if (error.response) {
@@ -45,6 +45,7 @@ if (error.response) {
       customError.type = "NetworkError";
     }
 
+    //In JavaScript, an error inside an interceptor doesn't automatically stop the rest of your code unless you explicitly reject it.
     // Reject with our clean, consistent error object
     return Promise.reject(customError);
   }

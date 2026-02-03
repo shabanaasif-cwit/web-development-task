@@ -31,7 +31,9 @@ function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-bold mb-4 uppercase text-orange-600">Categories</h4>
+            <h4 className="text-lg font-bold mb-4 uppercase text-orange-600 cursor-pointer hover:opacity-80 transition-opacity"
+              onClick={() => navigate("/home")}
+            >Categories</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link to="/business" className="hover:text-white transition-colors">Business</Link></li>
               <li><Link to="/technology" className="hover:text-white transition-colors">Technology</Link></li>
@@ -42,7 +44,7 @@ function Footer() {
 
           {/* Support */}
           <div>
-            <h4 className="text-lg font-bold mb-4 uppercase text-orange-600">Support</h4>
+            <h4 className="text-lg font-bold mb-4 uppercase text-orange-600 cursor-pointer hover:opacity-80 transition-opacity">Support</h4>
             <ul className="space-y-2 text-sm text-gray-400">
               <li><Link to="/contact" className="hover:text-white transition-colors">Contact Us</Link></li>
               <li><Link to="/about" className="hover:text-white transition-colors">About Us</Link></li>
@@ -53,7 +55,10 @@ function Footer() {
 
           {/* Newsletter */}
           <div>
-            <h4 className="text-lg font-bold mb-4 uppercase text-orange-600">Newsletter</h4>
+            <h4 tabIndex="0" className="text-lg font-bold mb-4 uppercase text-orange-600 cursor-pointer hover:opacity-80 transition-opacity focus:outline-none focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 rounded-sm"
+            onClick={() => navigate("/contact")}
+            >
+              Newsletter</h4>
             <div className="flex bg-[#1a1d21] border border-gray-800 p-1">
               <input 
                 type="email" 
@@ -73,10 +78,10 @@ function Footer() {
             © {currentYear} Daily News Media Group. All rights reserved.
           </p>
           <div className="flex gap-6 text-gray-400">
-            <Facebook size={20} className="hover:text-orange-600 cursor-pointer transition-colors" />
-            <Twitter size={20} className="hover:text-orange-600 cursor-pointer transition-colors" />
-            <Instagram size={20} className="hover:text-orange-600 cursor-pointer transition-colors" />
-            <Youtube size={20} className="hover:text-orange-600 cursor-pointer transition-colors" />
+            <Facebook size={20} className="hover:text-blue-600 cursor-pointer transition-colors" />
+            <Twitter size={20} className="hover:text-blue-400 cursor-pointer transition-colors" />
+            <Instagram size={20} className="hover:text-pink-500 cursor-pointer transition-colors" />
+            <Youtube size={20} className="hover:text-red-600 cursor-pointer transition-colors" />
           </div>
         </div>
       </div>

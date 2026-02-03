@@ -43,7 +43,7 @@ function TermsPage() {
         {/* Quick Summary Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
           {guidelines.map((item, index) => (
-            <div key={index} className="p-6 bg-gray-50 border border-gray-100 rounded-sm">
+            <div key={index} className="p-6 bg-gray-50 border border-gray-100 rounded-sm  shadow-sm">
               <div className="text-orange-600 mb-3">{item.icon}</div>
               <h4 className="font-bold text-[#121417] text-sm uppercase mb-2">{item.title}</h4>
               <p className="text-xs text-gray-600 leading-relaxed">{item.text}</p>
@@ -87,7 +87,7 @@ function TermsPage() {
             </p>
           </section>
 
-          <section className="bg-orange-50 p-6 border-l-4 border-orange-600 italic">
+          <section className="bg-orange-50 p-6 border-l-4 border-orange-600 italic shadow-lg">
             <p className="text-sm">
               Note: Daily News reserves the right to modify these terms at any time. We recommend checking 
               this page regularly for updates to ensure you stay informed.

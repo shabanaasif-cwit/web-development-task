@@ -12,6 +12,7 @@ export default function Card({
   author = "Staff Reporter",
   onAction,
 }) {
+  
   // --- LOGIC: TEXT TRUNCATION ---
   // Limits title and excerpt length to keep the grid uniform even with long text
   const truncatedTitle = title.split(" ").slice(0, 7).join(" ") + (title.split(" ").length > 8 ? "..." : "");
@@ -24,8 +25,8 @@ export default function Card({
     <article 
       // 'group': Essential to let child elements (like <h2>) react when the mouse is over this container
       // 'hover:-translate-y-2': Moves the card up slightly on hover
-      // 'hover:shadow-2xl': Creates a deep shadow to give a "lifted" 3D effect
-      className="group max-w-md w-full bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm transition-all duration-500 flex flex-col h-full hover:shadow-xl hover:-translate-y-2 cursor-pointer"
+      // 'hover:shadow-lg': Creates a shadow to give a "lifted" 3D effect
+      className="group max-w-md w-full bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm transition-all duration-500 flex flex-col h-full hover:shadow-lg hover:-translate-y-2 cursor-pointer"
       onClick={onAction}
     >
       {/* --- IMAGE SECTION --- */}
@@ -34,7 +35,7 @@ export default function Card({
         
           src={image && image !== "" ? image : fallbackImage}
           alt={title}
-          // 'group-hover:scale-110': Zooms the image in when the mouse enters the card
+          // 'group-hover:scale-110': Zooms put the image  when the mouse enters the card
           // 'duration-700': Makes the zoom effect slow and elegant
           //If the scale (size) of this image changes, don't just snap to the new size—animate it smoothly."
           //duration-700 group-hove:scale-110 10% larger than actual
@@ -73,7 +74,7 @@ export default function Card({
             }}
             // 'active:scale-95': Provides a "button press" physical feedback px: horizontal & py: vertical
             // 'hover:bg-black': Contrasts against the orange for a premium feel
-            className="shrink-0 bg-[#FF6600] text-white px-4 py-2 text-xs font-bold uppercase tracking-wide rounded-sm hover:bg-black transition-all duration-300 transform active:scale-95 shadow-md"
+            className="shrink-0 bg-orange-600 text-white px-4 py-2 text-xs font-bold uppercase tracking-wide rounded-sm hover:bg-black transition-all duration-300 transform active:scale-95 shadow-md"
           >
             Read more
           </button>

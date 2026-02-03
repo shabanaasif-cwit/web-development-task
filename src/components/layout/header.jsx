@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Search, Moon, Menu, X } from "lucide-react";
+import { Search, Moon,Sun, Menu, X } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useNews } from "../../context/NewsContext";
 
@@ -33,23 +33,23 @@ function Header() {
           <div className="flex items-center gap-3 flex-grow justify-end">
             
             {/* SEARCH BAR: Desktop (Right Side) */}
-              <div className="hidden sm:flex relative items-center w-full max-w-[320px]">
-                <div className="flex bg-[#1a1d21] items-center px-3 py-1 -skew-x-12 border border-gray-800 w-full relative">
-                  <input
-                    type="text"
-                    placeholder="Search anything..."
-                    className="bg-transparent border-none outline-none text-gray-300 text-sm py-1 skew-x-12 w-full focus:ring-0"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  {/* This button now has the orange background and proper skewing */}
-                  <button className="bg-orange-600 text-white p-2 ml-2  hover:bg-orange-700 transition-colors">
-                    <div className="skew-x-12">
-                      <Search size={18} strokeWidth={2.5} />
-                    </div>
-                  </button>
-                </div>
+        <div className="hidden sm:flex relative items-center w-full max-w-[320px]">
+          <div className="flex bg-[#1a1d21] items-center px-3 py-1 -skew-x-12 border border-gray-800 w-full relative">
+            <input
+              type="text"
+              placeholder="Search anything..."
+              className="bg-transparent border-none outline-none text-gray-300 text-sm py-1 skew-x-12 w-full focus:ring-1"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {/* This button now has the orange background and proper skewing */}
+            <button className="bg-orange-600 text-white p-2 ml-2  hover:bg-orange-700 transition-colors">
+              <div className="skew-x-12">
+                <Search size={18} strokeWidth={2.5} />
               </div>
+            </button>
+          </div>
+        </div>
 
             {/* THEME TOGGLE (Always visible next to search/menu) */}
             <button className="bg-orange-600 p-2 rounded-md text-white shrink-0 hover:bg-orange-700 transition-colors">

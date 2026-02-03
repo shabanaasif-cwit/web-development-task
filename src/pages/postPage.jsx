@@ -2,7 +2,7 @@ import React, { useState, useCallback, useMemo, useEffect } from "react";
 // MODIFICATION: Import useParams to listen to the URL category
 import { useParams } from "react-router-dom"; 
 import PostList from "../components/posts/postList";
-import EmptyState from "../components/common/EmptyState";
+import EmptyState from "../components/common/emptystate";
 import { useNews } from "../context/NewsContext"; 
 
 function PostPage() {
@@ -91,7 +91,7 @@ function PostPage() {
                 setSortType(e.target.value);
                 setCurrentPage(1); 
               }}
-              className="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-sm focus:ring-orange-500 focus:border-orange-500 block p-2 outline-none"
+              className="bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-sm focus:ring-orange-500 focus:border-orange-400 block p-2 outline-none"
             >
               <option value="newest">Newest First</option>
               <option value="oldest">Oldest First</option>
@@ -117,7 +117,7 @@ function PostPage() {
                       onClick={goToPrev}
                       disabled={currentPage === 1}
                       className={`px-6 py-2 border rounded-sm font-semibold transition-all ${
-                        currentPage === 1 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-black hover:text-white"
+                        currentPage === 1 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-orange-600 hover:text-white"
                       }`}
                     >
                       ← Prev
@@ -129,7 +129,7 @@ function PostPage() {
                       onClick={goToNext}
                       disabled={currentPage === totalPages || totalPages === 0}
                       className={`px-6 py-2 border rounded-sm font-semibold transition-all ${
-                        currentPage === totalPages || totalPages === 0 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-black hover:text-white"
+                        currentPage === totalPages || totalPages === 0 ? "text-gray-300 border-gray-100 cursor-not-allowed" : "text-black border-black hover:bg-orange-600 hover:text-white"
                       }`}
                     >
                       Next →

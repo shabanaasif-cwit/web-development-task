@@ -124,7 +124,7 @@ function ContactPage() {
 
               <button
                 type="submit"
-                className="bg-[#121417] text-white px-8 py-4 font-bold flex items-center gap-3 hover:bg-orange-600 transition-all uppercase tracking-widest"
+                className="bg-[#ff6600] text-white px-8 py-4 font-bold flex items-center gap-3 hover:bg-black  transition-all uppercase tracking-widest"
               >
                 Send Message <Send size={18} />
               </button>

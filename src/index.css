@@ -1,65 +1,29 @@
 @import "tailwindcss";
+
+/* Ensure the root and body take full width/height without blocking theme colors */
 #root {
   width: 100%;
-  max-width: 100%; /* Limits the row width so 3 cards fit perfectly 1200px*/
-  padding: 0rem;     /* 10rem Padding ensures it doesn't touch screen edges */
-}
-a {
-  font-weight: 500;
-  color: #ffffff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #f54a00;
+  
 }
 
 body {
+  /*remove default spacing */
   margin: 0;
-  display: flex;
-  justify-content: center; /* Horizontally centers the content */
+
   min-height: 100vh;
-  background-color: #ffffff; /* Matches your screenshot theme */
+  /* Remove the background-color: #ffffff line from here! */
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
+/* Keep your custom button shape but remove the hard background color 
+   so the classes in your JSX work correctly */
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
+
   font-weight: 500;
-  font-family: inherit; 
-  background-color: rgb(245, 74, 0);
+  
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #2c3133;
+  transition: all 0.25s;
 }
 
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-}
-.card {
-  padding: 5px 10;
-  background: white;
-  border-radius: 8px;
-}
-
+/* Remove @media (prefers-color-scheme: light) because it conflicts 
+   with our manual toggle system */

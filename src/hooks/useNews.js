@@ -21,7 +21,7 @@ export const useNews = () => {
     }
   };
 
-  //it should render once
+  //it should render when the category changes
   useEffect(() => {
     getPosts();
   }, []);

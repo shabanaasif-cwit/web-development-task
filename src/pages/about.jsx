@@ -36,8 +36,8 @@ function AboutPage() {
               Our mission is simple: to provide rigorous, real-time journalism and in-depth analysis on the stories that shape our world. We strive to be the most reliable and up-to-date news source for our global audience.
             </p>
           </div>
-          <div className="bg-gray-100 p-8 border border-gray-100 italic text-gray-600 relative">
-            {/* -top-2 qutation marks*/}
+          <div className="bg-gray-100 p-8 border border-gray-100 italic text-gray-600 relative shadow-lg">
+            {/* -top-2 quotation marks*/}
             <span className="text-6xl text-orange-200 absolute -top-1 -left-2 font-italic">"</span>
             We don't just report the news; we explain why it matters to your life, your business, and your future.
           </div>
@@ -46,7 +46,7 @@ function AboutPage() {
         {/* Values Section */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="text-center p-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4 shadow-lg">
               <Globe size={32} />
             </div>
             <h4 className="font-bold text-[#121417] mb-2 uppercase">Global Reach</h4>
@@ -54,7 +54,7 @@ function AboutPage() {
           </div>
 
           <div className="text-center p-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4 shadow-lg">
               <ShieldCheck size={32} />
             </div>
             <h4 className="font-bold text-[#121417] mb-2 uppercase">Fact Checked</h4>
@@ -62,7 +62,7 @@ function AboutPage() {
           </div>
 
           <div className="text-center p-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4 shadow-lg">
               <Users size={32} />
             </div>
             <h4 className="font-bold text-[#121417] mb-2 uppercase">Community</h4>
@@ -70,7 +70,7 @@ function AboutPage() {
           </div>
 
           <div className="text-center p-6">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-orange-50 text-orange-600 mb-4 shadow-lg">
               <Award size={32} />
             </div>
             <h4 className="font-bold text-[#121417] mb-2 uppercase">Integrity</h4>

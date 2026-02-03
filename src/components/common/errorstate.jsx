@@ -1,4 +1,5 @@
 import React from "react";
+import { AlertTriangle } from "lucide-react";
 
 export default function ErrorState({
   title = "Something went wrong",
@@ -7,7 +8,9 @@ export default function ErrorState({
 }) {
   return (
     <div className="max-w-md bg-white border border-red-200 rounded-sm shadow-sm p-6 text-center space-y-4">
-      <div className="text-red-500 text-4xl">⚠️</div>
+      <div className="text-red-500 text-4xl">
+        <AlertTriangle className="text-red-500 w-12 h-12 animate-pulse" />
+      </div>
 
       <h2 className="text-lg font-semibold text-gray-900">
         {title}
